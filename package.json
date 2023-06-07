@@ -1,0 +1,34 @@
+{
+  "name": "devconnector",
+  "version": "1.0.0",
+  "description": "Social network for developers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaisyWang919/DevConnector.git"
+  },
+  "author": "Daisy Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DaisyWang919/DevConnector/issues"
+  },
+  "homepage": "https://github.com/DaisyWang919/DevConnector#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.1.0",
+    "nodemon": "^2.0.22"
+  }
+}
