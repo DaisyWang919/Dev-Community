@@ -48,7 +48,7 @@ const App = () => {
               <Login />
               </section>
             }/>
-            <Route exact path="/profile" element={
+            <Route exact path="/profiles" element={
               <section className='container'>
               <Profiles />
               </section>
