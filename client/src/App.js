@@ -8,12 +8,18 @@ import Register from './components/auth/Register';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profile-forms/CreateProfile';
+import AddExperience from './components/profile-forms/AddExperience';
+import PrivateRoute from './components/routing/PrivateRoute';
+import Profiles from './components/profiles/Profiles';
+import AddEducation from './components/profile-forms/AddEducation';
+
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
-import PrivateRoute from './components/routing/PrivateRoute';
+
 
 
 if (localStorage.token) {
@@ -42,6 +48,11 @@ const App = () => {
               <Login />
               </section>
             }/>
+            <Route exact path="/profile" element={
+              <section className='container'>
+              <Profiles />
+              </section>
+            }/>
             <Route
             path="/dashboard"
             element={
@@ -54,6 +65,27 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute component={CreateProfile} />
+              </section>}
+            />
+            <Route
+            path="/edit-profile"
+            element={
+              <section className='container'>
+                <PrivateRoute component={CreateProfile} />
+              </section>}
+            />
+            <Route
+            path="/add-experience"
+            element={
+              <section className='container'>
+                <PrivateRoute component={AddExperience} />
+              </section>}
+            />
+            <Route
+            path="/add-education"
+            element={
+              <section className='container'>
+                <PrivateRoute component={AddEducation} />
               </section>}
             />
           </Routes>

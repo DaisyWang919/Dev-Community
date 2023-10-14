@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../Middleware/auth');
+const auth = require('../../middleware/auth');
 const {check, validationResult} = require('express-validator');
 const request = require('request');
 const config = require('config');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post')
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
@@ -101,7 +102,7 @@ router.post('/', [auth,
 });
 
 
-// @route   GET api/profile
+// @route   GET api/profile       
 // @desc    Get all profiles
 // @access  Public
 
@@ -141,7 +142,8 @@ router.get("/user/:user_id", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
     try{
-        // @todo - remove users posts
+        // Remove users posts
+        await Post.deleteMany( { user: req.user.id } )
         // Remove profile
         await Profile.findOneAndRemove( { user: req.user.id } );
         // Remove User
@@ -209,21 +211,20 @@ router.put('/experience', [auth, [
 // @access  Private
 
 router.delete('/experience/:exp_id', auth, async (req, res) => {
-    try{
-        const profile = await Profile.findOne( {user: req.user.id} );
-        
+    try {
+        const foundProfile = await Profile.findOne({ user: req.user.id });
+    
         foundProfile.experience = foundProfile.experience.filter(
-            (exp) => exp._id.toString() !== req.params.exp_id
-          );
-      
-          await foundProfile.save();
-          return res.status(200).json(foundProfile);
-
-        
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+          (exp) => exp._id.toString() !== req.params.exp_id
+        );
+    
+        await foundProfile.save();
+        return res.status(200).json(foundProfile);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: 'Server error' });
+      }
+    
 });
 
 
@@ -285,19 +286,17 @@ router.put('/education', [auth, [
 // @access  Private
 
 router.delete('/education/:edu_id', auth, async (req, res) => {
-    try{
-        const profile = await Profile.findOne( {user: req.user.id} );
-
-        
+    try {
+        const foundProfile = await Profile.findOne({ user: req.user.id });
         foundProfile.education = foundProfile.education.filter(
-            (edu) => edu._id.toString() !== req.params.edu_id
-          );
-          await foundProfile.save();
-          return res.status(200).json(foundProfile);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+          (edu) => edu._id.toString() !== req.params.edu_id
+        );
+        await foundProfile.save();
+        return res.status(200).json(foundProfile);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: 'Server error' });
+      }
 });
 
 // @route   GET api/profile/github/:username
