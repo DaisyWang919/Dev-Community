@@ -1,0 +1,6 @@
+{
+	"mongoURI": "mongodb+srv://zijunwang:daisy@devconnector.t4ogqir.mongodb.net/?retryWrites=true&w=majority",
+	"jwtSecret": "mysecrettoken",
+	"githubclientID": "cb5a68d6ba1868e62487",
+	"githubSecret": "a3dab5b95f786110e469f86ed7709b5c7513bf77"
+}
