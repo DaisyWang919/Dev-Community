@@ -13,6 +13,8 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import Profiles from "./components/profiles/Profiles";
 import AddEducation from "./components/profile-forms/AddEducation";
 import Profile from "./components/profile/Profile";
+import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 // Redux
 import { Provider } from "react-redux";
@@ -73,6 +75,25 @@ const App = () => {
 							}
 						/>
 						<Route
+							exact
+							path='/posts'
+							element={
+								<section className='container'>
+									<PrivateRoute component={Posts} />
+								</section>
+							}
+						/>
+						<Route
+							exact
+							path='/posts/:id'
+							element={
+								<section className='container'>
+									<PrivateRoute component={Post} />
+								</section>
+							}
+						/>
+						<Route
+							exact
 							path='/dashboard'
 							element={
 								<section className='container'>
@@ -80,6 +101,7 @@ const App = () => {
 								</section>
 							}
 						/>
+
 						<Route
 							path='/create-profile'
 							element={
